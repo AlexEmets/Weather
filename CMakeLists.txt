@@ -11,8 +11,8 @@ find_package(Boost COMPONENTS system thread program_options REQUIRED)
 
 set(PROJECT_SOURCES
     ${SOURCE_DIRECTORY}/application.cpp
-#    ${SOURCE_DIRECTORY}/client.cpp
-#    ${SOURCE_DIRECTORY}/network.cpp
+    ${SOURCE_DIRECTORY}/client.cpp
+    ${SOURCE_DIRECTORY}/network.cpp
     ${SOURCE_DIRECTORY}/main.cpp
 )
 

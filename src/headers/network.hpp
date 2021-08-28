@@ -1,4 +1,7 @@
 #pragma once
+#include<boost/asio/connect.hpp>
+#include<boost/beast/http.hpp>
+#include<boost/asio/ip/tcp.hpp>
 
 namespace NetworkLayer
 {
@@ -7,13 +10,6 @@ namespace NetworkLayer
     namespace ip = boost::asio::ip;
     using tcp = ip::tcp;
     using ContextPtr = std::shared_ptr<boost::asio::io_context>;
-
-    // The io_context is required for all I/O
-    net::io_context ioc;
-
-    // These objects perform our I/O
-    tcp::resolver resolver(ioc);
-    beast::tcp_stream stream(ioc);
 
     typedef struct IPAddress
     {
