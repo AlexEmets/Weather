@@ -1,3 +1,6 @@
+//#include<boost/program_options/options_description.hpp>
+#include<boost/program_options.hpp>
+
 class Application
 {
 public:
@@ -12,7 +15,7 @@ public:
       -t [ --token ] arg    Enter token
       -a [ --address ] arg  Enter host address
       -p [ --port ] arg     Enter port
-    */
+    ----------------------------------------------------------------------------------------------*/
 
     // A standart output should look like the example below
     /**
@@ -27,4 +30,7 @@ public:
      * @brief Parse command-line arguments ( Need to use boost::program_options ). Call Client
      * */
     int exec();
+private:
+    int argc;
+    char** argv;
 };

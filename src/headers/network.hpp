@@ -8,11 +8,19 @@ namespace NetworkLayer
     using tcp = ip::tcp;
     using ContextPtr = std::shared_ptr<boost::asio::io_context>;
 
+    // The io_context is required for all I/O
+    net::io_context ioc;
+
+    // These objects perform our I/O
+    tcp::resolver resolver(ioc);
+    beast::tcp_stream stream(ioc);
+
     typedef struct IPAddress
     {
         std::string host;
         std::string port;
     } IPAddress;
+
 
     class Network
     {
@@ -22,7 +30,9 @@ namespace NetworkLayer
          * @param context_ptr - smart pointer to io_context
          * @param connectionIP - structure that contains host and port for connection
          * */
-        Network(const ContextPtr & context_ptr, IPAddress connectionIP);
+        Network(const ContextPtr& context_ptr, IPAddress connectionIP) {
+
+        }
 
         /**
          * @brief Connection to server
