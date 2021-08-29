@@ -3,6 +3,17 @@
 #include "application.hpp"
 #include <iostream>
 #include <memory>
+#include <fstream>
+std::string readTokenFromFile(const std::string& fileName) {
+    std::ifstream inFile;
+    std::string fileToken;
+    inFile.open("/home/oleksandr/Weather/token.txt");
+    char fikeCharacter;
+    while (inFile >> fikeCharacter) {
+        fileToken += fikeCharacter;
+    }
+    return fileToken;
+}
 
 Application::Application(int argc, char* argv[]):argc(argc), argv(argv) {}
 
@@ -45,6 +56,11 @@ int Application::exec() {
     if(variablesMap.count("help") || variablesMap.size()==2) {
         std::cout << options;
     }
+
+    if(!variablesMap.count("token")) {
+        client.setToken(readTokenFromFile("token.txt"));
+    }
+
 
     if(variablesMap.count("city"))
     {
