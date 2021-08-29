@@ -23,7 +23,7 @@ void NetworkLayer::Network::send(const std::string &city_name, const std::string
 
     send(req);
 
-    std::cout << "\ntarget:" << target << "\n";
+    //std::cout << "\ntarget:" << target << "\n";
 }
 
 std::string NetworkLayer::Network::receive() {
@@ -56,7 +56,8 @@ bool NetworkLayer::Network::start() {
 std::string NetworkLayer::Network::generateTarget(const std::string & city_name, const std::string & token) const {
     return "https://" + m_connectionIP.host + "/data/2.5/weather?"
            + "q=" + city_name
-           + "&appid=" + token;
+           + "&appid=" + token
+           + "&units=metric";
 
 }
 
