@@ -27,12 +27,12 @@ int Application::exec() {
     }
 
 
-    try {
-        boost::program_options::notify(variablesMap);
-    } catch (std::exception& e) {
-        std::cerr << "Error: " << e.what() << "\n";
-        return 1;
-    }
+//    try {
+//        boost::program_options::notify(variablesMap);
+//    } catch (std::exception& e) {
+//        std::cerr << "Error: " << e.what() << "\n";
+//        return 1;
+//    }
 
 
     std::shared_ptr<boost::asio::io_context> ioc_shared;
@@ -40,24 +40,24 @@ int Application::exec() {
                                variablesMap["address"].as<std::string>(),
                                variablesMap["port"].as<std::string>());
 
-    if(variablesMap.count("help")) {
+
+    //variablesMap.size()==2 => there are only default values in the map(no arguments are written)
+    if(variablesMap.count("help") || variablesMap.size()==2) {
         std::cout << options;
     }
 
-    if(variablesMap.count("city")) {
-
-        // передать параметр города в ClientLayer::Client client (через setCity)
+    if(variablesMap.count("city"))
+    {
         client.setCity(variablesMap["city"].as<std::string>());
-
     }
-    if(variablesMap.count("token")) {
 
-        // передать токен в ClientLayer::Client client (через setToken)
+    if(variablesMap.count("token"))
+    {
         client.setToken(variablesMap["token"].as<std::string>());
-
     }
+
     std::cout << '\n' << "city: " << client.getCity() << "\n" << "token: " << client.getToken() << '\n';
-    //std::cout << client.getCity() << '\n';
+
     return 0;
 }
 

@@ -26,9 +26,7 @@ namespace NetworkLayer
          * @param context_ptr - smart pointer to io_context
          * @param connectionIP - structure that contains host and port for connection
          * */
-        Network(const ContextPtr& context_ptr, IPAddress connectionIP) {
-
-        }
+        Network(const ContextPtr& context_ptr, IPAddress connectionIP);
 
         /**
          * @brief Connection to server
@@ -48,7 +46,8 @@ namespace NetworkLayer
         std::string receive();
 
     private:
-
+        ContextPtr m_context_ptr;
+        IPAddress m_connectionIP;
         /**
          * @brief Send request to connectionIP
          * @param request - ready for send request
