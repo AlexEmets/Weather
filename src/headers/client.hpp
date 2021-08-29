@@ -1,8 +1,31 @@
 #pragma once
 #include"network.hpp"
+#include <boost/property_tree/json_parser.hpp>
+using boost::property_tree::ptree;
 namespace ClientLayer
 {
     using tcp = NetworkLayer::tcp;
+
+//    std::istringstream iss(R"({
+//        "topology_1": {
+//            "clnt_id": "aldgdsgsd",
+//            "sensors": {
+//                "num_sensors": "6",
+//                "sensor_1": {
+//                    "time_interval": "5#15",
+//                    "min_bound": "",
+//                    "max_bound": "54",
+//                    "anomaly": "2%",
+//                    "anomaly_window": "70",
+//                    "jump": "10",
+//                    "topic": "sense/thubrahali/temp",
+//                    "qos": "1"
+//                }
+//            }
+//        }
+//    })");
+
+
 
     class Client
     {
@@ -22,7 +45,7 @@ namespace ClientLayer
 
 
 
-        std::string outputResponse();
+        std::string outputResponse(const std::string& serverResponse);
 
         void setCity(const std::string & city_name);
         void setToken(const std::string & token);

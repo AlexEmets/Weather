@@ -35,13 +35,32 @@ void ClientLayer::Client::process() {
 
     m_connection->send(m_city_name, m_token);
 
-    m_connection->receive();
+    std::string serverResponse = m_connection->receive();
 
-    std::cout << outputResponse();
+    std::cout << '\n' << serverResponse << "\n\n" << outputResponse(serverResponse) << '\n';
 }
 
-std::string ClientLayer::Client::outputResponse() {
-    return std::string();
+std::string ClientLayer::Client::outputResponse(const std::string& serverResponse) {
+
+    std::istringstream iss(serverResponse);
+
+   std::string responseTemplate = "City: %1%\n"
+                                  "Temperature: %2%°C\n"
+                                  "Wind's speed: %3% meter/sec\n"
+                                  "Wind's direction: %4%°\n";
+
+    ptree document;
+
+    read_json(iss, document);
+
+    auto oss = boost::format(responseTemplate) %
+            document.get<std::string>("name") %
+            document.get<double>("main.temp") %
+            document.get<double>("wind.speed") %
+            document.get<int>("wind.deg");
+
+    return oss.str();
+
 }
 
 
