@@ -47,6 +47,7 @@ bool NetworkLayer::Network::start() {
     try {
         m_stream.connect(results);
     }catch(...) {
+        std::cout << "Can't reach server";
         return false;
     }
 
@@ -65,7 +66,7 @@ void NetworkLayer::Network::send(const http::request<http::string_body> &request
 
      //Send the HTTP request to the remote host
      if(!m_errors) {
-         http::write(m_stream, request);
+         http::write(m_stream, request, m_errors);
      }
 }
 
@@ -77,15 +78,19 @@ http::response<http::dynamic_body> NetworkLayer::Network::p_receive() {
     // Declare a container to hold the response
     http::response<http::dynamic_body> res;
 
-    // Receive the HTTP response
-    http::read(m_stream, buffer, res);
 
+    if(!m_errors) {
+        // Receive the HTTP response
+        http::read(m_stream, buffer, res, m_errors);
+    }
 
     return res;
 }
 
 NetworkLayer::Network::~Network() {
-    m_stream.socket().shutdown(tcp::socket::shutdown_both, m_errors);
+    if(!m_errors) {
+        m_stream.socket().shutdown(tcp::socket::shutdown_both, m_errors);
+    }
 }
 
 

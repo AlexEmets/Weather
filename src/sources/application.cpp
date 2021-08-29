@@ -29,12 +29,12 @@ int Application::exec() {
 
     boost::program_options::variables_map variablesMap;
 
-//try {
+try {
         boost::program_options::store(boost::program_options::parse_command_line(this->argc, this->argv, options), variablesMap);
-//    }catch(...) {
-//        std::cerr<<"Parse error";
-//        return 0;
-//    }
+    }catch(...) {
+        std::cerr<<"Parse error";
+        return 0;
+    }
 
 
 //    try {
@@ -80,8 +80,6 @@ int Application::exec() {
         std::cout << "Can't get weather in " << client.getCity();
         return 1;
     }
-
-
     return 0;
 }
 
