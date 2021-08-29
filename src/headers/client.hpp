@@ -22,7 +22,7 @@ namespace ClientLayer
 
 
 
-        std::string outputResponse();
+        std::string outputResponse(const std::string& serverResponse);
 
         void setCity(const std::string & city_name);
         void setToken(const std::string & token);

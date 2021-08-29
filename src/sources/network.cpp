@@ -12,6 +12,7 @@ NetworkLayer::Network::Network(const ContextPtr &context_ptr, IPAddress connecti
 
 void NetworkLayer::Network::send(const std::string &city_name, const std::string &token) {
     std::string target = generateTarget(city_name, token);
+    //std::string target = "https://api.openweathermap.org/data/2.5/weather?q=Kyiv&appid=292633d2713150012cac0d4434220325";
 
     int version = 11;
 
@@ -26,9 +27,9 @@ void NetworkLayer::Network::send(const std::string &city_name, const std::string
 }
 
 std::string NetworkLayer::Network::receive() {
-    http::response<http::dynamic_body> server_answer = p_receive();
-    std::cout << server_answer;
-    return std::string();
+
+    return boost::beast::buffers_to_string(p_receive().body().data());
+
 }
 
 bool NetworkLayer::Network::start() {
@@ -49,12 +50,11 @@ bool NetworkLayer::Network::start() {
         return false;
     }
 
-
     return true;
 }
 
 std::string NetworkLayer::Network::generateTarget(const std::string & city_name, const std::string & token) const {
-    return m_connectionIP.host + "/data/2.5/weather?"
+    return "https://" + m_connectionIP.host + "/data/2.5/weather?"
            + "q=" + city_name
            + "&appid=" + token;
 
@@ -77,6 +77,7 @@ http::response<http::dynamic_body> NetworkLayer::Network::p_receive() {
 
     // Receive the HTTP response
     http::read(m_stream, buffer, res);
+
 
     return res;
 }

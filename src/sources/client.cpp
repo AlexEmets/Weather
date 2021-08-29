@@ -35,13 +35,13 @@ void ClientLayer::Client::process() {
 
     m_connection->send(m_city_name, m_token);
 
-    m_connection->receive();
+    std::string serverResponse = m_connection->receive();
 
-    std::cout << outputResponse();
+    std::cout << outputResponse(serverResponse);
 }
 
-std::string ClientLayer::Client::outputResponse() {
-    return std::string();
+std::string ClientLayer::Client::outputResponse(const std::string& serverResponse) {
+    return serverResponse;
 }
 
 
