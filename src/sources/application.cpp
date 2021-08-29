@@ -36,7 +36,7 @@ int Application::exec() {
 
 
     std::shared_ptr<boost::asio::io_context> ioc_shared;
-    ClientLayer::Client client(ioc_shared,
+    ClientLayer::Client client(std::make_shared<boost::asio::io_context>(),
                                variablesMap["address"].as<std::string>(),
                                variablesMap["port"].as<std::string>());
 
@@ -58,6 +58,7 @@ int Application::exec() {
 
     std::cout << '\n' << "city: " << client.getCity() << "\n" << "token: " << client.getToken() << '\n';
 
+    client.process();
     return 0;
 }
 

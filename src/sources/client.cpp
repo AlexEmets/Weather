@@ -16,7 +16,10 @@ void ClientLayer::Client::setToken(const std::string &token) {
 
 ClientLayer::Client::Client(const NetworkLayer::ContextPtr &context_ptr, std::string host, std::string port)
             : m_connection(new NetworkLayer::Network(context_ptr, {std::move(host), std::move(port)})){
-    ;
+
+
+
+
 }
 
 std::string ClientLayer::Client::getCity() const {
@@ -40,4 +43,5 @@ void ClientLayer::Client::process() {
 std::string ClientLayer::Client::outputResponse() {
     return std::string();
 }
+
 

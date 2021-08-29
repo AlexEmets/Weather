@@ -20,6 +20,8 @@ namespace ClientLayer
          * */
         void process();
 
+
+
         std::string outputResponse();
 
         void setCity(const std::string & city_name);
