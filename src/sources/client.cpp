@@ -33,11 +33,17 @@ std::string ClientLayer::Client::getToken() const {
 void ClientLayer::Client::process() {
     m_connection->start();
 
-    m_connection->send(m_city_name, m_token);
+    try {
 
-    std::string serverResponse = m_connection->receive();
+        m_connection->send(m_city_name, m_token);
+        std::string serverResponse = m_connection->receive();
+        std::cout << outputResponse(serverResponse) << '\n';
 
-    std::cout << '\n' << serverResponse << "\n\n" << outputResponse(serverResponse) << '\n';
+
+    }catch(...) {
+        throw "ErrorInClient!";
+    }
+
 }
 
 std::string ClientLayer::Client::outputResponse(const std::string& serverResponse) {

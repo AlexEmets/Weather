@@ -38,6 +38,7 @@ namespace NetworkLayer
          * @param connectionIP - structure that contains host and port for connection
          * */
         Network(const ContextPtr& context_ptr, IPAddress connectionIP);
+        ~Network();
 
         /**
          * @brief Connection to server
@@ -60,6 +61,7 @@ namespace NetworkLayer
         ContextPtr m_context_ptr;
         IPAddress m_connectionIP;
         std::string m_target;
+        beast::error_code m_errors;
         beast::tcp_stream m_stream;
         /**
          * @brief Send request to connectionIP

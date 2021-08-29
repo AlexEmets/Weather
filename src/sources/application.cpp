@@ -3,7 +3,6 @@
 #include "application.hpp"
 #include <iostream>
 #include <memory>
-#include <fstream>
 std::string readTokenFromFile(const std::string& fileName) {
     std::ifstream inFile;
     std::string fileToken;
@@ -30,12 +29,12 @@ int Application::exec() {
 
     boost::program_options::variables_map variablesMap;
 
-    try {
+//try {
         boost::program_options::store(boost::program_options::parse_command_line(this->argc, this->argv, options), variablesMap);
-    }catch(...) {
-        std::cerr<<"Parse error";
-        return 0;
-    }
+//    }catch(...) {
+//        std::cerr<<"Parse error";
+//        return 0;
+//    }
 
 
 //    try {
@@ -55,6 +54,7 @@ int Application::exec() {
     //variablesMap.size()==2 => there are only default values in the map(no arguments are written)
     if(variablesMap.count("help") || variablesMap.size()==2) {
         std::cout << options;
+        return 0;
     }
 
     if(!variablesMap.count("token")) {
@@ -74,7 +74,13 @@ int Application::exec() {
 
    // std::cout << '\n' << "city: " << client.getCity() << "\n" << "token: " << client.getToken() << '\n';
 
-    client.process();
+    try {
+        client.process();
+    }catch(...) {
+        std::cout << "Can't get weather in " << client.getCity();
+        return 1;
+    }
+
 
     return 0;
 }

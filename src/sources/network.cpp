@@ -50,7 +50,7 @@ bool NetworkLayer::Network::start() {
         return false;
     }
 
-    return true;
+    return m_stream.socket().is_open();
 }
 
 std::string NetworkLayer::Network::generateTarget(const std::string & city_name, const std::string & token) const {
@@ -64,8 +64,9 @@ std::string NetworkLayer::Network::generateTarget(const std::string & city_name,
 void NetworkLayer::Network::send(const http::request<http::string_body> &request) {
 
      //Send the HTTP request to the remote host
-    http::write(m_stream, request);
-
+     if(!m_errors) {
+         http::write(m_stream, request);
+     }
 }
 
 http::response<http::dynamic_body> NetworkLayer::Network::p_receive() {
@@ -81,6 +82,10 @@ http::response<http::dynamic_body> NetworkLayer::Network::p_receive() {
 
 
     return res;
+}
+
+NetworkLayer::Network::~Network() {
+    m_stream.socket().shutdown(tcp::socket::shutdown_both, m_errors);
 }
 
 
