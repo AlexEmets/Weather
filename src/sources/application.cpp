@@ -56,9 +56,10 @@ int Application::exec() {
         client.setToken(variablesMap["token"].as<std::string>());
     }
 
-    std::cout << '\n' << "city: " << client.getCity() << "\n" << "token: " << client.getToken() << '\n';
+   // std::cout << '\n' << "city: " << client.getCity() << "\n" << "token: " << client.getToken() << '\n';
 
     client.process();
+
     return 0;
 }
 
