@@ -2,8 +2,6 @@
 #include"client.hpp"
 #include<boost/program_options.hpp>
 
-
-
 class Application
 {
 public:

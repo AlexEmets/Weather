@@ -5,7 +5,7 @@ project(Weather)
 set(HEADERS_DIRECTORY src/headers)
 set(SOURCE_DIRECTORY src/sources)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 find_package(Boost COMPONENTS system thread program_options REQUIRED)
 

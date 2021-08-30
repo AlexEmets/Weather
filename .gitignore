@@ -1,7 +1,10 @@
 cmake-build-debug
 .idea
 .vscode
+Dockerfile
 build/
+token.txt
+
 # Prerequisites
 *.d
 

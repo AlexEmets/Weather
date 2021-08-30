@@ -4,8 +4,6 @@
 #include <utility>
 #include <iostream>
 
-
-
 void ClientLayer::Client::setCity(const std::string &city_name) {
     m_city_name = city_name;
 }
